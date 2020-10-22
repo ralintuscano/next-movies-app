@@ -17,7 +17,9 @@
 }
 
 .title {
-  color: #084994;
+  font-family: serif;
+  /* color: #556cd6; */
+  color: #303030;
   text-decoration: none;
 }
 
