@@ -42,17 +42,28 @@ function SearchMovie() {
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
   const [searchResult, setSearchResult] = useState();
-
+  const searchBtnProps = title === "" ? { disabled: true } : undefined;
   const handleSubmit = (e) => {
     e.preventDefault();
     //make a fetch request and store data to the store
 
     //generate query
     const queryGenerator = (title, year) => {
-      let query = "before";
-      if (title) query.concat(`t=${title}`);
-      if (year) query.concat(`y=${year}`);
-      alert("Something :", query);
+      // let query = "before";
+      // const titleQuery,yearQuery;
+      // if (title) {
+      //   titleQuery = `t=${title}`;
+      // }
+
+      // if (year) {
+      //   yearQuery = `y=${year}`;
+      // }
+
+      // var input1 = `This is some more Something`;
+      // var api = "https://api.openweathermap.org/data/2.5/weather?";
+      const query = `&t=${title}&y=${year}`;
+
+      alert(`Some ${query}`);
     };
 
     queryGenerator(title, year);
@@ -64,7 +75,7 @@ function SearchMovie() {
         className={classes.root}
         noValidate
         autoComplete="off"
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit} //Build Error
       >
         <TextField
           id="outlined-basic"
@@ -80,7 +91,12 @@ function SearchMovie() {
           value={year}
           onChange={(e) => setYear(e.target.value)}
         />
-        <Button className={classes.submitButton} type="submit">
+        <Button
+          color="primary"
+          variant="contained"
+          type="submit"
+          {...searchBtnProps}
+        >
           Search
         </Button>
       </form>

@@ -1,5 +1,7 @@
-// var API = {
-//   searchApi: `https://www.omdbapi.com/?apikey=${process.env.API_KEY}`,
-// };
+const API_KEY = 24505685;
 
-// export default API;
+let API = {
+  searchApi: `https://www.omdbapi.com/?apikey=${process.env.API_KEY}`,
+};
+
+export default API;

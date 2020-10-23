@@ -19,7 +19,11 @@ const useStyles = makeStyles({
 });
 function Series() {
   const classes = useStyles();
-
+  const props = {
+    title: "Batman Returns",
+    plot:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi necessitatibus minima minus laborum saepe reprehenderit maiores numquam, magnam nulla dicta qui voluptas vero quibusdam harum facere excepturi enim veniam?",
+  };
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -40,7 +44,7 @@ function Series() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <SeriesModal />
+        <SeriesModal {...props} />
       </CardActions>
     </Card>
   );

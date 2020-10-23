@@ -18,8 +18,8 @@ export default function Home() {
         {/* <Suspense fallback={<Loading />}> */}
         <h1 className={styles.title}>Series App</h1>
         <SearchMovie />
-        {/* <SeriesList /> */}
-        {/* <PaginateSeries /> */}
+        <SeriesList />
+        <PaginateSeries />
         {/* </Suspense> */}
       </main>
     </div>

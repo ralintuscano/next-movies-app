@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal() {
+export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const { title, plot } = props;
   const handleOpen = () => {
     setOpen(true);
   };
@@ -56,13 +56,9 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="series__title">Batman Returns</h2>
-            <p id="series__plot">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
-              eligendi necessitatibus minima minus laborum saepe reprehenderit
-              maiores numquam, magnam nulla dicta qui voluptas vero quibusdam
-              harum facere excepturi enim veniam?
-            </p>
+            <h2 id="series__title">{title}</h2>
+            <h3>Plot</h3>
+            <p id="series__plot">{plot}</p>
           </div>
         </Fade>
       </Modal>
