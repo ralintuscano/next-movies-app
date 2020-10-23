@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
 
 function PaginateSeries() {
   const classes = useStyles();
+
+  // const nextBtnProps = maxPage === currPage ? { disabled: true } : undefined;
+  // const prevBtnProps = currPage === 1 ? { disabled: true } : undefined;
   return (
     <React.Fragment>
       <Grid container className={classes.root} justify="center" spacing={2}>
@@ -23,6 +26,7 @@ function PaginateSeries() {
             size="large"
             color="secondary"
             variant="outlined"
+            // {...prevBtnProps}
             // onClick={handleOpen}
           >
             Previous
@@ -33,6 +37,7 @@ function PaginateSeries() {
             size="large"
             color="secondary"
             variant="contained"
+            // {...nextBtnProps}
             // onClick={handleOpen}
           >
             Next

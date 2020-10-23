@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/styles";
@@ -39,28 +39,46 @@ const useStyles = makeStyles((theme) => ({
 
 function SearchMovie() {
   const classes = useStyles();
+  const [title, setTitle] = useState("");
+  const [year, setYear] = useState("");
+  const [searchResult, setSearchResult] = useState();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    //make a fetch request and store data to the store
+
+    //generate query
+    const queryGenerator = (title, year) => {
+      let query = "before";
+      if (title) query.concat(`t=${title}`);
+      if (year) query.concat(`y=${year}`);
+      alert("Something :", query);
+    };
+
+    queryGenerator(title, year);
+  };
+
   return (
     <React.Fragment>
       <form
         className={classes.root}
         noValidate
         autoComplete="off"
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert("Submitted form!");
-        }}
+        // onSubmit={handleSubmit}
       >
         <TextField
           id="outlined-basic"
           label="Series Title"
           variant="outlined"
-          // onChange={handleChange}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <TextField
           id="outlined-basic"
           label="Year"
           variant="outlined"
-          // onChange={handleChange}
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
         />
         <Button className={classes.submitButton} type="submit">
           Search

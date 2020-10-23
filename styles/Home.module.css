@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  /* padding: 0 0.5rem; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,7 +8,7 @@
 }
 
 .main {
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -19,6 +19,7 @@
 .title {
   font-family: serif;
   /* color: #556cd6; */
+  padding: 20px 0;
   color: #303030;
   text-decoration: none;
 }
