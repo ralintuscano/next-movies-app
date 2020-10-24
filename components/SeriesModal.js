@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
+import API from "../utils/api";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,16 +25,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TransitionsModal(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const { title, plot } = props;
+  const [open, setOpen] = useState(false);
+  const [plot, setPlot] = useState();
+  const { title } = props;
   const handleOpen = () => {
     setOpen(true);
+    // console.log("Props ", props);
+    getPlot(props.imdbID);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
+  const getPlot = async (seriesId) => {
+    try {
+      let query = `i=${seriesId}`;
+      let data = await fetch(`${API}&${query}`);
+      if (data) {
+        let json = await data.json();
+        const res = json ? json : [];
+        // console.log("Modal Response", res);
+        setPlot(res.Plot);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // useEffect(()={
+
+  // },)
   return (
     <div>
       <Button

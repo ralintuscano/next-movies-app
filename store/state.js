@@ -13,7 +13,7 @@ const SeriesStateProvider = ({ children }) => {
   //called by search bar
   const getSeries = async (title, year) => {
     try {
-      let query = `s=${title}&y=${year}&page=1`;
+      let query = `type=series&s=${title}&y=${year}&page=1`;
       let data = await fetch(`${API}&${query}`);
       if (data) {
         let json = await data.json();
@@ -41,7 +41,7 @@ const SeriesStateProvider = ({ children }) => {
       if (pageNumber >= apiData.length / 8) {
         //dispatch to fetch
         alert("IF");
-        let query = `s=${title}&y=${year}&page=${pageNumber}`;
+        let query = `type=series&s=${title}&y=${year}&page=${pageNumber}`;
         let data = await fetch(`${API}&${query}`);
         if (data) {
           let json = await data.json();
@@ -61,7 +61,6 @@ const SeriesStateProvider = ({ children }) => {
         }
       } else {
         alert("ELSE");
-        //dispatch to update page
         dispatch({ type: t.PREV_NEXT_PAGE, payload: { pageNo: pageNumber } });
       }
     } catch (error) {
