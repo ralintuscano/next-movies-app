@@ -17,13 +17,14 @@ const useStyles = makeStyles({
     boxShadow: "7px 10px 11px -1px rgba(194,194,194,1)",
   },
 });
-function Series() {
+
+function Series(props) {
   const classes = useStyles();
-  const props = {
-    title: "Batman Returns",
-    plot:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi necessitatibus minima minus laborum saepe reprehenderit maiores numquam, magnam nulla dicta qui voluptas vero quibusdam harum facere excepturi enim veniam?",
-  };
+  // const props = {
+  //   title: "Batman Returns",
+  //   plot:
+  //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi necessitatibus minima minus laborum saepe reprehenderit maiores numquam, magnam nulla dicta qui voluptas vero quibusdam harum facere excepturi enim veniam?",
+  // };
   return (
     <Card className={classes.root}>
       <CardActionArea>

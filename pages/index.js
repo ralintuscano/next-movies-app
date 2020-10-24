@@ -16,10 +16,12 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         {/* <Suspense fallback={<Loading />}> */}
-        <h1 className={styles.title}>Series App</h1>
-        <SearchMovie />
-        <SeriesList />
-        <PaginateSeries />
+        <DataLayer>
+          <h1 className={styles.title}>Series App</h1>
+          <SearchMovie />
+          <SeriesList />
+          <PaginateSeries />
+        </DataLayer>
         {/* </Suspense> */}
       </main>
     </div>
