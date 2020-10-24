@@ -32,11 +32,14 @@
 
 // console.log("result :", result);
 
-export default function paginate(data) {
-  const itemsPerPage = 8;
-  const start = (data.pageNo - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  const result = data.seriesDetails.slice(start, end);
-  return result;
+export default function paginate(apiData, pageNo) {
+  if (apiData) {
+    const itemsPerPage = 8;
+    const start = (pageNo - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const result = apiData.slice(start, end);
+    return result;
+  }
+  return;
   //   console.log("result :", result);
 }

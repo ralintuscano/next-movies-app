@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/styles";
@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { red } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core";
+import DataLayerContext from "../store/DataLayerContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,30 +44,13 @@ function SearchMovie() {
   const [year, setYear] = useState("");
   const [searchResult, setSearchResult] = useState();
   const searchBtnProps = title === "" ? { disabled: true } : undefined;
+
+  const { getSeries, pageNo } = useContext(DataLayerContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    //make a fetch request and store data to the store
-
-    //generate query
-    const queryGenerator = (title, year) => {
-      // let query = "before";
-      // const titleQuery,yearQuery;
-      // if (title) {
-      //   titleQuery = `t=${title}`;
-      // }
-
-      // if (year) {
-      //   yearQuery = `y=${year}`;
-      // }
-
-      // var input1 = `This is some more Something`;
-      // var api = "https://api.openweathermap.org/data/2.5/weather?";
-      const query = `&t=${title}&y=${year}`;
-
-      alert(`Some ${query}`);
-    };
-
-    queryGenerator(title, year);
+    // const query = `&t=the&y=''`;
+    getSeries(title, year);
   };
 
   return (

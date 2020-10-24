@@ -6,6 +6,7 @@ import SeriesList from "../components/SeriesList";
 import PaginateSeries from "../components/PaginateSeries";
 import Loading from "../components/Loading";
 import { Suspense } from "react";
+import SeriesStateProvider from "../store/state";
 
 export default function Home() {
   return (
@@ -16,12 +17,12 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         {/* <Suspense fallback={<Loading />}> */}
-        <DataLayer>
+        <SeriesStateProvider>
           <h1 className={styles.title}>Series App</h1>
           <SearchMovie />
           <SeriesList />
           <PaginateSeries />
-        </DataLayer>
+        </SeriesStateProvider>
         {/* </Suspense> */}
       </main>
     </div>

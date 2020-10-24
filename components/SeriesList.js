@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Series from "./Series";
 import paginate from "../utils/paginate";
+import DataLayerContext from "../store/DataLayerContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,38 +23,26 @@ const useStyles = makeStyles((theme) => ({
 
 const SeriesList = () => {
   const classes = useStyles();
+  const { pageNo, apiData } = useContext(DataLayerContext);
+  const [windowSize, setWindowSize] = useState();
 
-  const data = {
-    pageNo: 1,
-    seriesDetails: [
-      { imdbId: 2443434, title: "batman", year: 1999, plot: "abc" },
-      { imdbId: 2, title: "batman", year: 1, plot: "abc" },
-      { imdbId: 3, title: "batman", year: 1999, plot: "abc" },
-      { imdbId: 4, title: "batman", year: 1999, plot: "abc" },
-      { imdbId: 5, title: "batman", year: 1999, plot: "abc" },
-      { imdbId: 6, title: "batman", year: 1999, plot: "abc" },
-      { imdbId: 7, title: "batman", year: 1999, plot: "abc" },
-      { imdbId: 8, title: "batman", year: 1999, plot: "abc" },
-      { imdbId: 9, title: "batman", year: 1999, plot: "abc" },
-    ],
-  };
+  useEffect(() => {
+    if (apiData) {
+      setWindowSize(paginate(apiData, pageNo));
+    }
+    alert(windowSize);
+  }, [apiData]);
 
-  const seriesItems = paginate(data);
-  return (
+  return windowSize ? (
     <Grid container className={classes.root} justify="center" spacing={4}>
-      {/* <Grid item xs={12}> */}
-      {/* <Grid container justify="center" spacing={4}> */}
-      {[0, 1, 2, 3, 4, 5, 6, 7].map((series, index) => (
+      {windowSize.map((series, index) => (
         <Grid key={index} item>
           <Series series={series} />
         </Grid>
       ))}
-      {seriesItems.map((series, index) => (
-        <h6>{series.title}</h6>
-      ))}
-      {/* </Grid> */}
-      {/* </Grid> */}
     </Grid>
+  ) : (
+    <h1>NO Results Found</h1>
   );
 };
 

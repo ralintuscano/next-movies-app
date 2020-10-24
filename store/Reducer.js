@@ -1,37 +1,29 @@
-export const initialState = {
-  user: null,
-  playlists: [],
-  playling: false,
-  item: null,
-  token: null,
-};
+import * as t from "./constants";
 
-const reducer = (state, action) => {
-  console.log(action);
+export default (state, action) => {
+  const { payload, type } = action;
 
-  switch (action.type) {
-    case "SET_USER":
+  switch (type) {
+    case t.SEARCH_DATA:
       return {
-        ...state,
-        user: action.user,
+        pageNo: 1,
+        params: payload.params,
+        apiData: payload.apiData,
       };
 
+    // case t.NEXT_PAGE_DATA:
+    //   return {
+    //     ...state,
+    //     pageNo: payload.pageNo,
+    //     query: payload.query,
+    //     apiData: payload.apiData,
+    //   };
+    // case t.PREV_NEXT_PAGE:
+    //   return {
+    //     ...state,
+    //     pageNo: payload.pageNo,
+    //   };
     default:
       return state;
   }
 };
-
-export default reducer;
-
-// import { SET_ALERT, REMOVE_ALERT } from '../types';
-
-// export default (state, action) => {
-//   switch (action.type) {
-//     case SET_ALERT:
-//       return [...state, action.payload];
-//     case REMOVE_ALERT:
-//       return state.filter(alert => alert.id !== action.payload);
-//     default:
-//       return state;
-//   }
-// };
