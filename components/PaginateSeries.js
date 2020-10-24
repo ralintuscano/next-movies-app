@@ -13,18 +13,31 @@ const useStyles = makeStyles((theme) => ({
 
 function PaginateSeries() {
   const classes = useStyles();
-  const { pageNo, apiData, response, totalResults } = useContext(
-    DataLayerContext
-  );
-  const [pageNumber, setPageNumber] = useState(1);
+  const {
+    pageNo,
+    apiData,
+    response,
+    totalResults,
+    params,
+    getSeriesFromNavigation,
+  } = useContext(DataLayerContext);
+  // const [pageNumber, setPageNumber] = useState(pageNo);
 
   const maxPage =
-    totalResults % 8 === 0 ? totalResults / 8 : totalResults / 8 + 1;
-  const nextBtnProps = maxPage === pageNumber ? { disabled: true } : undefined;
-  const prevBtnProps = pageNo === 1 ? { disabled: true } : undefined;
-  useEffect(() => {
-    // alert("Dispatching an action");
-  }, [pageNo]);
+    totalResults % 8 === 0
+      ? Math.round(totalResults / 8)
+      : Math.round(totalResults / 8) + 1;
+  const nextBtnProps = maxPage === pageNo ? { disabled: true } : undefined;
+  const prevBtnProps = pageNo > 1 ? undefined : { disabled: true };
+
+  // useEffect(() => {
+  //   // alert("Dispatching an action");
+  // }, [pageNo]);
+
+  // const handlePrevClicked = (e)=>{
+  //   dispatch
+  // }
+
   return (
     <React.Fragment>
       <Grid container className={classes.root} justify="center" spacing={2}>
@@ -34,7 +47,7 @@ function PaginateSeries() {
             color="secondary"
             variant="outlined"
             {...prevBtnProps}
-            onClick={() => setPageNumber(pageNo - 1)}
+            onClick={() => getSeriesFromNavigation(pageNo - 1, apiData)}
           >
             Previous
           </Button>
@@ -45,7 +58,14 @@ function PaginateSeries() {
             color="secondary"
             variant="contained"
             {...nextBtnProps}
-            onClick={() => setPageNumber(pageNo + 1)}
+            onClick={() =>
+              getSeriesFromNavigation(
+                pageNo + 1,
+                apiData,
+                params.title,
+                params.year
+              )
+            }
           >
             Next
           </Button>

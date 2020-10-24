@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Series from "./Series";
 import paginate from "../utils/paginate";
+import PaginateSeries from "../components/PaginateSeries";
 import DataLayerContext from "../store/DataLayerContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,16 +34,17 @@ const SeriesList = () => {
       setResponseStatus(response);
     }
     // alert(windowSize);
-  }, [apiData, response]);
-
+  }, [apiData, response, pageNo]);
+  // ,
   return windowSize && response == "True" ? (
     <Grid container className={classes.root} justify="center" spacing={4}>
       {windowSize.map((series, index) => (
         <Grid key={index} item>
           <Series series={series} />
-          {console.log("SERIES", series)}
+          {/* {console.log("SERIES", series)} */}
         </Grid>
       ))}
+      <PaginateSeries />
     </Grid>
   ) : (
     <h1>NO Results Found</h1>

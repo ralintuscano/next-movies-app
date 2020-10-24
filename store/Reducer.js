@@ -13,18 +13,17 @@ export default (state, action) => {
         totalResults: payload.totalResults,
       };
 
-    // case t.NEXT_PAGE_DATA:
-    //   return {
-    //     ...state,
-    //     pageNo: payload.pageNo,
-    //     query: payload.query,
-    //     apiData: payload.apiData,
-    //   };
-    // case t.PREV_NEXT_PAGE:
-    //   return {
-    //     ...state,
-    //     pageNo: payload.pageNo,
-    //   };
+    case t.NEXT_PAGE_DATA:
+      return {
+        ...state,
+        pageNo: payload.pageNo,
+        // apiData: payload.apiData,
+      };
+    case t.PREV_NEXT_PAGE:
+      return {
+        ...state,
+        pageNo: payload.pageNo,
+      };
     default:
       return state;
   }

@@ -21,7 +21,7 @@ export default function Home() {
           <h1 className={styles.title}>Series App</h1>
           <SearchMovie />
           <SeriesList />
-          <PaginateSeries />
+          {/* <PaginateSeries /> */}
         </SeriesStateProvider>
         {/* </Suspense> */}
       </main>

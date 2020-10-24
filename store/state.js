@@ -18,7 +18,7 @@ const SeriesStateProvider = ({ children }) => {
       if (data) {
         let json = await data.json();
         const res = json ? json : [];
-        console.log("Response ", res.Search);
+        // console.log("Response ", res.Search);
         dispatch({
           type: t.SEARCH_DATA,
           payload: {
@@ -36,16 +36,38 @@ const SeriesStateProvider = ({ children }) => {
   };
 
   //called by previous and next buttons
-  //   const getSeriesFromNavigation = async(query,pageNo) ={
-  //     try {
-  //             if(pageNo <= (totalPosts/8)){
+  const getSeriesFromNavigation = async (pageNumber, apiData, title, year) => {
+    try {
+      if (pageNumber >= apiData.length / 8) {
+        //dispatch to fetch
+        alert("IF");
+        let query = `s=${title}&y=${year}&page=${pageNumber}`;
+        let data = await fetch(`${API}&${query}`);
+        if (data) {
+          let json = await data.json();
+          const res = json ? json : [];
+          const copyOriginal = [...apiData];
 
-  //             }
-  //         }
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //   }
+          Array.prototype.push.apply(copyOriginal, res.Series);
+          //   const mergedResponse = copyOriginal.concat([...res.Series]);
+          console.log("Merged", copyOriginal);
+          dispatch({
+            type: t.NEXT_PAGE_DATA,
+            payload: {
+              pageNo: pageNumber,
+              /**apiData and page number */
+            },
+          });
+        }
+      } else {
+        alert("ELSE");
+        //dispatch to update page
+        dispatch({ type: t.PREV_NEXT_PAGE, payload: { pageNo: pageNumber } });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <DataLayerContext.Provider
@@ -54,7 +76,9 @@ const SeriesStateProvider = ({ children }) => {
         params: state.params,
         apiData: state.apiData,
         response: state.response,
+        totalResults: state.totalResults,
         getSeries,
+        getSeriesFromNavigation,
       }}
     >
       {children}
