@@ -9,6 +9,8 @@ export default (state, action) => {
         pageNo: 1,
         params: payload.params,
         apiData: payload.apiData,
+        response: payload.response,
+        totalResults: payload.totalResults,
       };
 
     // case t.NEXT_PAGE_DATA:

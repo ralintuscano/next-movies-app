@@ -2,30 +2,32 @@ import React, { useReducer } from "react";
 import axios from "axios";
 
 import DataLayerContext from "./DataLayerContext";
+import initialState from "./DataLayerContext";
 import Reducer from "./Reducer";
 import * as t from "./constants";
 import API from "../utils/api";
 
 const SeriesStateProvider = ({ children }) => {
-  let initialState = {
-    pageNo: 1,
-    params: "",
-    apiData: [],
-  };
-
   const [state, dispatch] = useReducer(Reducer, initialState);
 
   //called by search bar
   const getSeries = async (title, year) => {
     try {
-      let query = `t=${title}&y=${year}`;
+      let query = `s=${title}&y=${year}&page=1`;
       let data = await fetch(`${API}&${query}`);
       if (data) {
         let json = await data.json();
         const res = json ? json : [];
+        console.log("Response ", res.Search);
         dispatch({
           type: t.SEARCH_DATA,
-          payload: { params: { title: title, year: year }, apiData: [res] },
+          payload: {
+            pageNo: 1,
+            params: { title: title, year: year },
+            apiData: res.Search,
+            response: res.Response,
+            totalResults: res.totalResults,
+          },
         });
       }
     } catch (error) {
@@ -51,6 +53,7 @@ const SeriesStateProvider = ({ children }) => {
         pageNo: state.pageNo,
         params: state.params,
         apiData: state.apiData,
+        response: state.response,
         getSeries,
       }}
     >
@@ -60,11 +63,3 @@ const SeriesStateProvider = ({ children }) => {
 };
 
 export default SeriesStateProvider;
-
-// 4 dispatch functions :
-//         SEARCH Bar
-
-//         NEXT_PAGE_DATA
-//         NEXT_NAV
-
-//         PREV NAV

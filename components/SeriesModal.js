@@ -58,7 +58,7 @@ export default function TransitionsModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="series__title">{title}</h2>
+            <h2 id="series__title">{props.Title}</h2>
             <h3>Plot</h3>
             <p id="series__plot">{plot}</p>
           </div>

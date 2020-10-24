@@ -1,8 +1,10 @@
 import { createContext } from "react";
-let initialState = {
+export const initialState = {
   pageNo: 1,
   params: "",
   apiData: [],
+  response: "",
+  totalResults: "",
 };
 
 const DataLayerContext = createContext(initialState);

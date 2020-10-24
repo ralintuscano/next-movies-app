@@ -23,21 +23,24 @@ const useStyles = makeStyles((theme) => ({
 
 const SeriesList = () => {
   const classes = useStyles();
-  const { pageNo, apiData } = useContext(DataLayerContext);
+  const { pageNo, apiData, response } = useContext(DataLayerContext);
   const [windowSize, setWindowSize] = useState();
+  const [responseStatus, setResponseStatus] = useState(false);
 
   useEffect(() => {
     if (apiData) {
       setWindowSize(paginate(apiData, pageNo));
+      setResponseStatus(response);
     }
-    alert(windowSize);
-  }, [apiData]);
+    // alert(windowSize);
+  }, [apiData, response]);
 
-  return windowSize ? (
+  return windowSize && response == "True" ? (
     <Grid container className={classes.root} justify="center" spacing={4}>
       {windowSize.map((series, index) => (
         <Grid key={index} item>
           <Series series={series} />
+          {console.log("SERIES", series)}
         </Grid>
       ))}
     </Grid>

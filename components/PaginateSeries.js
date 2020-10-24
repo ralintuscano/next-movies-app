@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import DataLayerContext from "../store/DataLayerContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,8 +13,14 @@ const useStyles = makeStyles((theme) => ({
 
 function PaginateSeries() {
   const classes = useStyles();
-  const [pageNo, setPageNo] = useState(1);
-  const nextBtnProps = pageNo <= 5 ? undefined : { disabled: true };
+  const { pageNo, apiData, response, totalResults } = useContext(
+    DataLayerContext
+  );
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const maxPage =
+    totalResults % 8 === 0 ? totalResults / 8 : totalResults / 8 + 1;
+  const nextBtnProps = maxPage === pageNumber ? { disabled: true } : undefined;
   const prevBtnProps = pageNo === 1 ? { disabled: true } : undefined;
   useEffect(() => {
     // alert("Dispatching an action");
@@ -27,7 +34,7 @@ function PaginateSeries() {
             color="secondary"
             variant="outlined"
             {...prevBtnProps}
-            onClick={() => setPageNo(pageNo - 1)}
+            onClick={() => setPageNumber(pageNo - 1)}
           >
             Previous
           </Button>
@@ -38,7 +45,7 @@ function PaginateSeries() {
             color="secondary"
             variant="contained"
             {...nextBtnProps}
-            onClick={() => setPageNo(pageNo + 1)}
+            onClick={() => setPageNumber(pageNo + 1)}
           >
             Next
           </Button>

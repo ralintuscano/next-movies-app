@@ -12,40 +12,36 @@ import SeriesModal from "./SeriesModal";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    // height: 350,
+    minHeight: 400,
     width: 250,
     boxShadow: "7px 10px 11px -1px rgba(194,194,194,1)",
   },
 });
 
-function Series(props) {
+function Series(series) {
   const classes = useStyles();
-  // const props = {
-  //   title: "Batman Returns",
-  //   plot:
-  //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde eligendi necessitatibus minima minus laborum saepe reprehenderit maiores numquam, magnam nulla dicta qui voluptas vero quibusdam harum facere excepturi enim veniam?",
-  // };
+  // console.log("Series", series);
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           component="img"
           alt="Series Image"
-          height="220"
-          image="https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1250&q=80"
+          height="150"
+          image={series.series.Poster}
           title="Series"
         />
         <CardContent>
           <Typography variant="h5" component="h3">
-            Title : Batman
+            {series.series.Title}
           </Typography>
           <Typography variant="subtitle2" component="h6">
-            Year : 1999
+            Year : {series.series.Year}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <SeriesModal {...props} />
+        <SeriesModal {...series.series} />
       </CardActions>
     </Card>
   );
