@@ -17,7 +17,7 @@ export default (state, action) => {
       return {
         ...state,
         pageNo: payload.pageNo,
-        // apiData: payload.apiData,
+        apiData: payload.apiData,
       };
     case t.PREV_NEXT_PAGE:
       return {

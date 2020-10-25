@@ -48,13 +48,16 @@ const SeriesStateProvider = ({ children }) => {
           const res = json ? json : [];
           const copyOriginal = [...apiData];
 
-          Array.prototype.push.apply(copyOriginal, res.Series);
-          //   const mergedResponse = copyOriginal.concat([...res.Series]);
-          console.log("Merged", copyOriginal);
+          // Array.prototype.push.apply(copyOriginal, res.Series);
+          const mergedResponse = copyOriginal.concat(res.Search);
+          console.log("Copy Original", copyOriginal);
+          console.log("Res Series", res.Search);
+          console.log("Merged Series", mergedResponse);
           dispatch({
             type: t.NEXT_PAGE_DATA,
             payload: {
               pageNo: pageNumber,
+              apiData: mergedResponse,
               /**apiData and page number */
             },
           });

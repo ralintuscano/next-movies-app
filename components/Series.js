@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 function Series(series) {
   const classes = useStyles();
   // console.log("Series", series);
-  return (
+  return series.series ? (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
@@ -44,6 +44,8 @@ function Series(series) {
         <SeriesModal {...series.series} />
       </CardActions>
     </Card>
+  ) : (
+    ""
   );
 }
 
