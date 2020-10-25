@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, StylesProvider } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import SeriesModal from "./SeriesModal";
+// import 404 from "../public/404";
 
 const useStyles = makeStyles({
   root: {
@@ -20,19 +21,21 @@ const useStyles = makeStyles({
 
 function Series(series) {
   const classes = useStyles();
+  const onMediaFallback = (event) => (event.target.src = "/404.jpg");
   // console.log("Series", series);
   return series.series ? (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Series Image"
+          alt={series.series.Title}
           height="150"
           image={series.series.Poster}
           title="Series"
+          onError={onMediaFallback}
         />
         <CardContent>
-          <Typography variant="h5" component="h3">
+          <Typography variant="h6" component="h3">
             {series.series.Title}
           </Typography>
           <Typography variant="subtitle2" component="h6">

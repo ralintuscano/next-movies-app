@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
+    marginTop: theme.spacing(2),
     "& > *": {
       margin: theme.spacing(1),
       textAlign: "center",

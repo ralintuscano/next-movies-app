@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
     overflow: "scroll",
   },
+  read__button: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+  },
 }));
 
 export default function TransitionsModal(props) {
@@ -32,7 +37,6 @@ export default function TransitionsModal(props) {
   const { title } = props;
   const handleOpen = () => {
     setOpen(true);
-    // console.log("Props ", props);
     getPlot(props.imdbID);
   };
 
@@ -47,7 +51,6 @@ export default function TransitionsModal(props) {
       if (data) {
         let json = await data.json();
         const res = json ? json : [];
-        // console.log("Modal Response", res);
         setPlot(res.Plot);
       }
     } catch (error) {

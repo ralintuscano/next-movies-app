@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Series from "./Series";
 import paginate from "../utils/paginate";
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     height: 350,
-    width: 250,
+    width: 200,
     backgroundColor: "#303030",
   },
   control: {
@@ -38,15 +39,17 @@ const SeriesList = () => {
   // ,
   return response ? (
     windowSize && response == "True" ? (
-      <Grid container className={classes.root} justify="center" spacing={4}>
-        {windowSize.map((series, index) => (
-          <Grid key={index} item>
-            <Series series={series} />
-            {/* {console.log("SERIES", series)} */}
-          </Grid>
-        ))}
-        <PaginateSeries />
-      </Grid>
+      <Container maxWidth={false}>
+        <Grid container className={classes.root} justify="center" spacing={4}>
+          {windowSize.map((series, index) => (
+            <Grid key={index} item>
+              <Series series={series} />
+              {/* {console.log("SERIES", series)} */}
+            </Grid>
+          ))}
+          <PaginateSeries />
+        </Grid>
+      </Container>
     ) : (
       <h1>NO Results Found</h1>
     )
