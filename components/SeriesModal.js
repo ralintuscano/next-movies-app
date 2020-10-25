@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 300,
     minHeight: 200,
     maxWidth: 400,
+    maxHeight: 300,
     outline: "none",
+    overflow: "scroll",
   },
 }));
 
@@ -40,7 +42,7 @@ export default function TransitionsModal(props) {
 
   const getPlot = async (seriesId) => {
     try {
-      let query = `i=${seriesId}`;
+      let query = `plot=full&i=${seriesId}`;
       let data = await fetch(`${API}&${query}`);
       if (data) {
         let json = await data.json();

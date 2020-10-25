@@ -36,18 +36,22 @@ const SeriesList = () => {
     // alert(windowSize);
   }, [apiData, response, pageNo]);
   // ,
-  return windowSize && response == "True" ? (
-    <Grid container className={classes.root} justify="center" spacing={4}>
-      {windowSize.map((series, index) => (
-        <Grid key={index} item>
-          <Series series={series} />
-          {/* {console.log("SERIES", series)} */}
-        </Grid>
-      ))}
-      <PaginateSeries />
-    </Grid>
+  return response ? (
+    windowSize && response == "True" ? (
+      <Grid container className={classes.root} justify="center" spacing={4}>
+        {windowSize.map((series, index) => (
+          <Grid key={index} item>
+            <Series series={series} />
+            {/* {console.log("SERIES", series)} */}
+          </Grid>
+        ))}
+        <PaginateSeries />
+      </Grid>
+    ) : (
+      <h1>NO Results Found</h1>
+    )
   ) : (
-    <h1>NO Results Found</h1>
+    <h1>Search your favourite Series</h1>
   );
 };
 

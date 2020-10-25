@@ -11,11 +11,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "axios": "^0.20.0",
-    "lodash": "^4.17.20",
     "next": "9.5.5",
     "react": "17.0.0",
-    "react-dom": "17.0.0",
-    "react-paginate": "^6.5.0"
+    "react-dom": "17.0.0"
   }
 }
