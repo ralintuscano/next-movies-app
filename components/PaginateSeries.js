@@ -24,10 +24,13 @@ function PaginateSeries() {
   // const [pageNumber, setPageNumber] = useState(pageNo);
 
   const maxPage =
-    totalResults % 8 === 0
-      ? Math.round(totalResults / 8) - 1
-      : Math.round(totalResults / 8);
-  const nextBtnProps = maxPage === pageNo ? { disabled: true } : undefined;
+    // totalResults % 8 === 0
+    //   ? Math.ceil(totalResults / 8) - 1
+    //   : Math.ceil(totalResults / 8) - 1;
+    Math.floor(totalResults / 8);
+  const firstPage = totalResults < 8;
+  const nextBtnProps =
+    maxPage === pageNo || firstPage ? { disabled: true } : undefined;
   const prevBtnProps = pageNo > 1 ? undefined : { disabled: true };
 
   // useEffect(() => {

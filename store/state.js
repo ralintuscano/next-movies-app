@@ -40,15 +40,13 @@ const SeriesStateProvider = ({ children }) => {
     try {
       if (pageNumber >= apiData.length / 8) {
         //dispatch to fetch
-        alert("IF");
+        // alert("IF");
         let query = `type=series&s=${title}&y=${year}&page=${pageNumber}`;
         let data = await fetch(`${API}&${query}`);
         if (data) {
           let json = await data.json();
           const res = json ? json : [];
           const copyOriginal = [...apiData];
-
-          // Array.prototype.push.apply(copyOriginal, res.Series);
           const mergedResponse = copyOriginal.concat(res.Search);
           console.log("Copy Original", copyOriginal);
           console.log("Res Series", res.Search);
@@ -58,12 +56,11 @@ const SeriesStateProvider = ({ children }) => {
             payload: {
               pageNo: pageNumber,
               apiData: mergedResponse,
-              /**apiData and page number */
             },
           });
         }
       } else {
-        alert("ELSE");
+        // alert("ELSE");
         dispatch({ type: t.PREV_NEXT_PAGE, payload: { pageNo: pageNumber } });
       }
     } catch (error) {
