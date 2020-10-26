@@ -22,25 +22,12 @@ function PaginateSeries() {
     params,
     getSeriesFromNavigation,
   } = useContext(DataLayerContext);
-  // const [pageNumber, setPageNumber] = useState(pageNo);
 
-  const maxPage =
-    // totalResults % 8 === 0
-    //   ? Math.ceil(totalResults / 8) - 1
-    //   : Math.ceil(totalResults / 8) - 1;
-    Math.floor(totalResults / 8);
+  const maxPage = Math.floor(totalResults / 8);
   const firstPage = totalResults < 8;
   const nextBtnProps =
     maxPage === pageNo || firstPage ? { disabled: true } : undefined;
   const prevBtnProps = pageNo > 1 ? undefined : { disabled: true };
-
-  // useEffect(() => {
-  //   // alert("Dispatching an action");
-  // }, [pageNo]);
-
-  // const handlePrevClicked = (e)=>{
-  //   dispatch
-  // }
 
   return (
     <React.Fragment>

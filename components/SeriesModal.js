@@ -16,17 +16,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[3],
     padding: theme.spacing(2, 4, 3),
-    minWidth: 300,
-    minHeight: 200,
-    maxWidth: 400,
-    maxHeight: 300,
+    maxHeight: 500,
     outline: "none",
-    overflow: "scroll",
+    margin: "20% 10%",
   },
-  read__button: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100%",
+  read__plot: {
+    borderTop: "1px solid #D3D3D3",
+    padding: theme.spacing(2),
   },
 }));
 
@@ -86,8 +82,7 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="series__title">{props.Title}</h2>
-            <h3>Plot</h3>
-            <p id="series__plot">{plot}</p>
+            <p className={classes.read__plot}>{plot}</p>
           </div>
         </Fade>
       </Modal>

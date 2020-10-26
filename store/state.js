@@ -18,7 +18,7 @@ const SeriesStateProvider = ({ children }) => {
       if (data) {
         let json = await data.json();
         const res = json ? json : [];
-        // console.log("Response ", res.Search);
+
         dispatch({
           type: t.SEARCH_DATA,
           payload: {
@@ -39,8 +39,6 @@ const SeriesStateProvider = ({ children }) => {
   const getSeriesFromNavigation = async (pageNumber, apiData, title, year) => {
     try {
       if (pageNumber >= apiData.length / 8) {
-        //dispatch to fetch
-        // alert("IF");
         let query = `type=series&s=${title}&y=${year}&page=${pageNumber}`;
         let data = await fetch(`${API}&${query}`);
         if (data) {
@@ -48,9 +46,7 @@ const SeriesStateProvider = ({ children }) => {
           const res = json ? json : [];
           const copyOriginal = [...apiData];
           const mergedResponse = copyOriginal.concat(res.Search);
-          console.log("Copy Original", copyOriginal);
-          console.log("Res Series", res.Search);
-          console.log("Merged Series", mergedResponse);
+
           dispatch({
             type: t.NEXT_PAGE_DATA,
             payload: {
@@ -60,7 +56,6 @@ const SeriesStateProvider = ({ children }) => {
           });
         }
       } else {
-        // alert("ELSE");
         dispatch({ type: t.PREV_NEXT_PAGE, payload: { pageNo: pageNumber } });
       }
     } catch (error) {

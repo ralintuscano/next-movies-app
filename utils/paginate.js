@@ -38,7 +38,7 @@ export default function paginate(apiData, pageNo) {
     const start = (pageNo - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const result = apiData.slice(start, end);
-    console.log("result:", result);
+    // console.log("result:", result);
     return result;
   }
   return;

@@ -7,6 +7,7 @@ import Series from "./Series";
 import paginate from "../utils/paginate";
 import PaginateSeries from "../components/PaginateSeries";
 import DataLayerContext from "../store/DataLayerContext";
+import dynamic from "next/dynamic";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
     backgroundColor: "#303030",
   },
-  control: {
-    padding: theme.spacing(2),
-  },
 }));
 
 const SeriesList = () => {
@@ -28,33 +26,45 @@ const SeriesList = () => {
   const { pageNo, apiData, response } = useContext(DataLayerContext);
   const [windowSize, setWindowSize] = useState();
   const [responseStatus, setResponseStatus] = useState(false);
+  const ReactSuspense = dynamic(() => import("../components/ReactSuspense"), {
+    ssr: false,
+  });
 
   useEffect(() => {
     if (apiData) {
       setWindowSize(paginate(apiData, pageNo));
       setResponseStatus(response);
     }
-    // alert(windowSize);
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
   }, [apiData, response, pageNo]);
-  // ,
+
   return response ? (
     windowSize && response == "True" ? (
-      <Container maxWidth={false}>
-        <Grid container className={classes.root} justify="center" spacing={4}>
-          {windowSize.map((series, index) => (
-            <Grid key={index} item>
-              <Series series={series} />
-              {/* {console.log("SERIES", series)} */}
+      <ReactSuspense>
+        <div>
+          <Container className={classes.container} maxWidth={false}>
+            <Grid
+              container
+              className={classes.root}
+              justify="center"
+              spacing={4}
+            >
+              {windowSize.map((series, index) => (
+                <Grid key={index} item>
+                  <Series series={series} />
+                  {/* {console.log("SERIES", series)} */}
+                </Grid>
+              ))}
+              <PaginateSeries />
             </Grid>
-          ))}
-          <PaginateSeries />
-        </Grid>
-      </Container>
+          </Container>
+        </div>
+      </ReactSuspense>
     ) : (
-      <h1>NO Results Found</h1>
+      <h2>NO Results Found</h2>
     )
   ) : (
-    <h1>Search your favourite Series</h1>
+    <h2>Search your favourite Series</h2>
   );
 };
 

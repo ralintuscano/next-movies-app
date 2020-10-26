@@ -1,16 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 
-import { withStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import Container from "@material-ui/core/Container";
-import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
-
-import axios from "axios";
-import { red } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core";
+
 import DataLayerContext from "../store/DataLayerContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +43,6 @@ function SearchMovie() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const query = `&t=the&y=''`;
     getSeries(title, year);
   };
 
@@ -60,7 +52,7 @@ function SearchMovie() {
         className={classes.root}
         noValidate
         autoComplete="off"
-        onSubmit={handleSubmit} //Build Error
+        onSubmit={handleSubmit}
       >
         <TextField
           id="outlined-basic"
