@@ -43,7 +43,8 @@ const SeriesStateProvider = ({ children }) => {
           let json = await data.json();
           const res = json ? json : [];
           const copyOriginal = [...apiData];
-          const mergedResponse = copyOriginal.concat(res.Search);
+          const mergedResponse = (res.Search) ? copyOriginal.concat(res.Search) : copyOriginal;
+          console.log("COPY ORIGINAL", res.Search);
 
           dispatch({
             type: t.NEXT_PAGE_DATA,
