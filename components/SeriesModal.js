@@ -28,28 +28,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// export function fetchPlot(id) {
-//   let plotPromise = getPlot(id);
-//   return { plot: wrapPromise(plotPromise) };
-// }
-
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [plot, setPlot] = useState();
   const handleOpen = () => {
     setOpen(true);
-    // getPlot(props.imdbID);
-    // const plotResult = fetchPlot(props.imdbID);
-    // setPlot(plotResult);
-
-    setPlot(fetchPlot(props.imdbID).plot.read());
+    getPlot(props.imdbID);
   };
 
-  function fetchPlot(id) {
-    let plotPromise = getPlot(id);
-    return { plot: wrapPromise(plotPromise) };
-  }
   const handleClose = () => {
     setOpen(false);
   };
@@ -60,24 +47,13 @@ export default function TransitionsModal(props) {
 
   const getPlot = async (seriesId) => {
     try {
-      // let query = `plot=full&i=${seriesId}`;
-      // let data = await fetch(`${API}&${query}`);
-      // if (data) {
-      //   let json = await data.json();
-      //   const res = json ? json : [];
-      //   // setPlot(res.Plot);
-      //   return res.Plot;
-
-      // }
-
-      return new Promise((res, rej) => {
-        let query = `plot=full&i=${seriesId}`;
-        let data = res(fetch(`${API}&${query}`));
-        let json = res(data.json());
-        const response = json ? json : [];
-        // setPlot(res.Plot);
-        res(response.Plot);
-      });
+      let query = `plot=full&i=${seriesId}`;
+      let data = await fetch(`${API}&${query}`);
+      if (data) {
+        let json = await data.json();
+        const res = json ? json : [];
+        setPlot(res.Plot);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -109,7 +85,7 @@ export default function TransitionsModal(props) {
           <div className={classes.paper}>
             <ReactSuspense>
               <h2 id="series__title">{props.Title}</h2>
-              <p className={classes.read__plot}>{Promise.resolve(plot)}</p>
+              <p className={classes.read__plot}>{plot}</p>
             </ReactSuspense>
           </div>
         </Fade>
@@ -117,39 +93,3 @@ export default function TransitionsModal(props) {
     </div>
   );
 }
-
-const wrapPromise = (promise) => {
-  let status = "pending";
-  let result = "";
-  let suspender = promise.then(
-    (r) => {
-      (status = "success"), (result = r);
-    },
-    (e) => {
-      (status = "error"), (result = e);
-    }
-  );
-
-  return {
-    read() {
-      if (status == "pending") {
-        throw suspender;
-      } else if (status == "error") {
-        throw res;
-      } else if (status == "success") {
-        return result;
-      }
-    },
-  };
-};
-
-// export function fetchData() {
-//   let namePromise = fetchName();
-//   return { name: wrapPromise(namePromise) };
-// }
-
-// function fetchName() {
-//   return new Promise((resolve, reject) => {
-//     setTimeout(() => resolve("RALIN"), 5000);
-//   });
-// }

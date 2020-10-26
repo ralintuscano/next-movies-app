@@ -8,12 +8,11 @@ import Loading from "../components/Loading";
 import SeriesStateProvider from "../store/state";
 import dynamic from "next/dynamic";
 
-import Name from "../components/Name";
-
 export default function Home() {
   const ReactSuspense = dynamic(() => import("../components/ReactSuspense"), {
     ssr: false,
   });
+
   return (
     <div className={styles.container}>
       <Head>
@@ -24,12 +23,9 @@ export default function Home() {
         <SeriesStateProvider>
           <ToolBar />
           <SearchMovie />
-          <ReactSuspense>
-            <Name />
-            {/* <ReactSuspense> */}
-            <SeriesList />
-            {/* </ReactSuspense> */}
-          </ReactSuspense>
+          {/* <ReactSuspense> */}
+          <SeriesList />
+          {/* </ReactSuspense> */}
         </SeriesStateProvider>
       </main>
     </div>

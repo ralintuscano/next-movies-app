@@ -25,8 +25,7 @@ function PaginateSeries() {
 
   const maxPage = Math.floor(totalResults / 8);
   const firstPageIsLast = totalResults < 8;
-  const nextBtnProps =
-    maxPage === pageNo || firstPageIsLast ? { disabled: true } : undefined;
+  const nextBtnProps = maxPage === pageNo || firstPageIsLast ? { disabled: true } : undefined;
   const prevBtnProps = pageNo > 1 ? undefined : { disabled: true };
 
   return (
