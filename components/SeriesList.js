@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import Series from "./Series";
 import paginate from "../utils/paginate";
 import PaginateSeries from "../components/PaginateSeries";
@@ -13,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginTop: theme.spacing(5),
+    margin: 0,
+    width: "100%",
   },
   paper: {
     height: 350,
@@ -24,22 +25,20 @@ const useStyles = makeStyles((theme) => ({
 const SeriesList = () => {
   const classes = useStyles();
   const { pageNo, apiData, response } = useContext(DataLayerContext);
-  const [windowSize, setWindowSize] = useState();
-  const [responseStatus, setResponseStatus] = useState(false);
+  const [eightSeries, setEightSeries] = useState();
   const ReactSuspense = dynamic(() => import("../components/ReactSuspense"), {
     ssr: false,
   });
 
   useEffect(() => {
     if (apiData) {
-      setWindowSize(paginate(apiData, pageNo));
-      setResponseStatus(response);
+      setEightSeries(paginate(apiData, pageNo));
     }
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
   }, [apiData, response, pageNo]);
 
   return response ? (
-    windowSize && response == "True" ? (
+    eightSeries && response == "True" ? (
       <ReactSuspense>
         <div>
           <Container className={classes.container} maxWidth={false}>
@@ -49,10 +48,9 @@ const SeriesList = () => {
               justify="center"
               spacing={4}
             >
-              {windowSize.map((series, index) => (
+              {eightSeries.map((series, index) => (
                 <Grid key={index} item>
-                  <Series series={series} />
-                  {/* {console.log("SERIES", series)} */}
+                  <Series {...series} />
                 </Grid>
               ))}
               <PaginateSeries />

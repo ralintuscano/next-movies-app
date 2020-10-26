@@ -5,7 +5,6 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import SeriesModal from "./SeriesModal";
 
@@ -23,18 +22,19 @@ const useStyles = makeStyles({
   },
 });
 
-function Series(series) {
+function Series(props) {
   const classes = useStyles();
   const onMediaFallback = (event) => (event.target.src = "/404.jpg");
-  return series.series ? (
+  return props ? (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           component="img"
-          alt={series.series.Title}
+          alt={props.Title}
+          alt={props.Title}
           height="300px"
           width="100%"
-          image={series.series.Poster}
+          image={props.Poster}
           title="Series"
           onError={onMediaFallback}
         />
@@ -45,15 +45,15 @@ function Series(series) {
             component="h3"
             gutterBottom
           >
-            {series.series.Title}
+            {props.Title}
           </Typography>
           <Typography variant="subtitle2" component="p">
-            Year : {series.series.Year}
+            Year : {props.Year}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <SeriesModal {...series.series} />
+        <SeriesModal {...props} />
       </CardActions>
     </Card>
   ) : (

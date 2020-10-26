@@ -8,9 +8,9 @@ import Loading from "../components/Loading";
 import SeriesStateProvider from "../store/state";
 import dynamic from "next/dynamic";
 
-export default function Home() {
-  const isServer = typeof window === "undefined";
+import Name from "../components/Name";
 
+export default function Home() {
   const ReactSuspense = dynamic(() => import("../components/ReactSuspense"), {
     ssr: false,
   });
@@ -21,18 +21,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        {/* <Suspense fallback={<h1>LOADING......</h1>}> */}
-        {/* {console.log("IS-server", isServer)} */}
         <SeriesStateProvider>
+          <ToolBar />
+          <SearchMovie />
           <ReactSuspense>
-            <ToolBar />
-            <SearchMovie />
+            <Name />
             {/* <ReactSuspense> */}
             <SeriesList />
             {/* </ReactSuspense> */}
           </ReactSuspense>
         </SeriesStateProvider>
-        {/* </Suspense> */}
       </main>
     </div>
   );

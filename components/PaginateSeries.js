@@ -24,9 +24,9 @@ function PaginateSeries() {
   } = useContext(DataLayerContext);
 
   const maxPage = Math.floor(totalResults / 8);
-  const firstPage = totalResults < 8;
+  const firstPageIsLast = totalResults < 8;
   const nextBtnProps =
-    maxPage === pageNo || firstPage ? { disabled: true } : undefined;
+    maxPage === pageNo || firstPageIsLast ? { disabled: true } : undefined;
   const prevBtnProps = pageNo > 1 ? undefined : { disabled: true };
 
   return (
